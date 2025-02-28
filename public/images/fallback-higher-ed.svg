@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#1F2937"/>
+  <rect x="200" y="200" width="400" height="200" rx="8" fill="#374151"/>
+  <text x="400" y="320" text-anchor="middle" font-family="system-ui" font-size="24" fill="#9CA3AF">Higher Education</text>
+</svg>

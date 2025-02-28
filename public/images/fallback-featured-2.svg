@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="675" fill="#1F2937"/>
+  
+  <!-- Content Container -->
+  <rect x="300" y="187.5" width="600" height="300" rx="12" fill="#374151"/>
+  
+  <!-- Icon -->
+  <path d="M550 287.5 L650 287.5 C670 287.5 670 337.5 650 337.5 L550 337.5 C530 337.5 530 287.5 550 287.5Z" fill="#4B5563"/>
+  
+  <!-- Text -->
+  <text x="600" y="387.5" text-anchor="middle" font-family="system-ui" font-size="24" fill="#9CA3AF">Teaching Skills Story</text>
+  
+  <!-- Decorative Elements -->
+  <circle cx="450" cy="437.5" r="100" fill="#374151" opacity="0.1"/>
+  <circle cx="750" cy="237.5" r="80" fill="#4B5563" opacity="0.1"/>
+</svg>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with gradient -->
+  <rect width="800" height="600" fill="url(#paint0_linear)" rx="20"/>
+  
+  <!-- Decorative shapes -->
+  <circle cx="200" cy="300" r="160" fill="#6B46C1" opacity="0.1"/>
+  <circle cx="600" cy="200" r="120" fill="#9F7AEA" opacity="0.1"/>
+  
+  <!-- Abstract learning symbols -->
+  <path d="M300 200 L500 200 Q550 200 550 250 L550 350 Q550 400 500 400 L300 400 Q250 400 250 350 L250 250 Q250 200 300 200Z" fill="#9F7AEA" opacity="0.2"/>
+  <path d="M350 250 L450 250 Q470 250 470 270 L470 330 Q470 350 450 350 L350 350 Q330 350 330 330 L330 270 Q330 250 350 250Z" fill="#6B46C1"/>
+  
+  <!-- Text elements -->
+  <text x="400" y="300" text-anchor="middle" font-family="Arial" font-size="24" fill="white">K-12 Learning</text>
+  
+  <!-- Gradient definition -->
+  <defs>
+    <linearGradient id="paint0_linear" x1="0" y1="0" x2="800" y2="600" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#6B46C1"/>
+      <stop offset="100%" stop-color="#9F7AEA"/>
+    </linearGradient>
+  </defs>
+</svg>
