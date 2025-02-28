@@ -1,6 +1,7 @@
 {
-  "name": "maarifa-frontend",
+  "name": "maarifa-ai",
   "version": "0.1.0",
+  "description": "Ubongo's AI-powered educational platform",
   "private": true,
   "scripts": {
     "dev": "next dev",

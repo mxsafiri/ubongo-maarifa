@@ -1,7 +1,7 @@
-# Ubongo AI: Busara na Maarifa - Kubalisha Elimu kwa Teknolojia 🎓✨
+# Maarifa AI by Ubongo 🎓✨
 
 ## Kuhusu (About)
-Ubongo AI ni jukwaa la kisasa la elimu linalounganisha teknolojia ya AI na uzoefu wa kujifunza mtandaoni. Tunalenga kuboresha elimu kupitia teknolojia ya kisasa na maudhui ya kuvutia.
+Maarifa AI ni jukwaa la kisasa la elimu kutoka Ubongo, linalounganisha teknolojia ya AI na uzoefu wa kujifunza mtandaoni. Tunalenga kuboresha elimu kupitia teknolojia ya kisasa na maudhui ya kuvutia.
 
 ## Vipengele Muhimu (Core Features)
 
