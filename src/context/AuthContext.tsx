@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { User, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth'
-import { auth } from '@/lib/firebase'
+import { auth } from '@/config/firebase'
 import type { UserProfile } from '@/types/user'
 
 interface AuthContextType {
