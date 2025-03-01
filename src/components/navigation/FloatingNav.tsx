@@ -4,8 +4,8 @@ import {
   BookOpenIcon,
   ChartBarIcon,
   AcademicCapIcon,
-  UserIcon as UserCircleIcon,
-} from '@heroicons/react/outline'
+  UserIcon,
+} from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -14,7 +14,7 @@ const navItems = [
   { href: '/library', icon: BookOpenIcon, label: 'Library' },
   { href: '/progress', icon: ChartBarIcon, label: 'Progress' },
   { href: '/learning-path', icon: AcademicCapIcon, label: 'Learning' },
-  { href: '/profile', icon: UserCircleIcon, label: 'Profile' },
+  { href: '/profile', icon: UserIcon, label: 'Profile' },
 ]
 
 export default function FloatingNav() {

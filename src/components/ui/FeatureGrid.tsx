@@ -1,14 +1,14 @@
 import { motion } from 'framer-motion'
 import {
-  BeakerIcon,
   AcademicCapIcon,
   BookOpenIcon,
   ChartBarIcon,
-  UserGroupIcon,
-  BadgeCheckIcon as TrophyIcon,
-  LightningBoltIcon as BoltIcon,
-  ChatIcon as ChatBubbleBottomCenterTextIcon,
-} from '@heroicons/react/outline'
+  UsersIcon as UserGroupIcon,
+  CheckBadgeIcon as TrophyIcon,
+  BoltIcon,
+  ChatBubbleLeftIcon as ChatIcon,
+  BeakerIcon,
+} from '@heroicons/react/24/outline'
 
 const features = [
   {
@@ -55,7 +55,7 @@ const features = [
     name: 'Mentorship',
     description:
       'Get guidance from experienced educators and Olympic athletes through our mentorship program.',
-    icon: ChatBubbleBottomCenterTextIcon,
+    icon: ChatIcon,
     color: 'text-indigo-500',
     bg: 'bg-indigo-500/10',
   },

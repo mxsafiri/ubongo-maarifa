@@ -1,13 +1,15 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { authService } from '@/services/auth'
+import { User, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth'
+import { auth } from '@/lib/firebase'
 import type { UserProfile } from '@/types/user'
 
 interface AuthContextType {
-  user: UserProfile | null
+  user: User | null
+  userProfile: UserProfile | null
   loading: boolean
   error: string | null
-  login: (code: string) => Promise<void>
+  login: (email: string, password: string) => Promise<void>
   logout: () => Promise<void>
   updateProfile: (data: Partial<UserProfile>) => Promise<void>
 }
@@ -15,38 +17,36 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<UserProfile | null>(null)
+  const [user, setUser] = useState<User | null>(null)
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()
 
   useEffect(() => {
-    checkAuth()
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      setUser(user)
+      if (user) {
+        try {
+          // Fetch user profile from Firestore here
+          // const profile = await getUserProfile(user.uid)
+          // setUserProfile(profile)
+        } catch (err) {
+          console.error('Error fetching user profile:', err)
+        }
+      } else {
+        setUserProfile(null)
+      }
+      setLoading(false)
+    })
+
+    return () => unsubscribe()
   }, [])
 
-  const checkAuth = async () => {
-    try {
-      const token = localStorage.getItem('olympic_token')
-      if (!token) {
-        setLoading(false)
-        return
-      }
-
-      const profile = await authService.getUserProfile()
-      setUser(profile)
-    } catch (err) {
-      setError('Authentication failed')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const login = async (code: string) => {
+  const login = async (email: string, password: string) => {
     try {
       setLoading(true)
-      const { token, user: profile } = await authService.loginWithOlympicId(code)
-      localStorage.setItem('olympic_token', token)
-      setUser(profile)
+      await signInWithEmailAndPassword(auth, email, password)
       router.push('/dashboard')
     } catch (err) {
       setError('Login failed')
@@ -58,18 +58,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const logout = async () => {
     try {
-      await authService.logout()
-      setUser(null)
+      await signOut(auth)
       router.push('/auth/login')
     } catch (err) {
       setError('Logout failed')
+      throw err
     }
   }
 
   const updateProfile = async (data: Partial<UserProfile>) => {
     try {
-      const updated = await authService.updateUserProfile(data)
-      setUser(updated)
+      if (!user) throw new Error('No user logged in')
+      // Update profile in Firestore here
+      // const updated = await updateUserProfile(user.uid, data)
+      // setUserProfile(updated)
     } catch (err) {
       setError('Profile update failed')
       throw err
@@ -78,7 +80,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, error, login, logout, updateProfile }}
+      value={{ user, userProfile, loading, error, login, logout, updateProfile }}
     >
       {children}
     </AuthContext.Provider>

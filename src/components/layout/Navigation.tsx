@@ -4,15 +4,20 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import {
   HomeIcon,
-  BookOpenIcon,
+  UserIcon,
+  Cog6ToothIcon as CogIcon,
+  ArrowRightOnRectangleIcon as LogoutIcon,
   AcademicCapIcon,
+  CheckBadgeIcon as BadgeCheckIcon,
+  BookOpenIcon,
   ChartBarIcon,
-  UserGroupIcon,
+  ChatBubbleLeftIcon as ChatIcon,
+  ClockIcon,
   DocumentTextIcon,
-  CogIcon,
-  MenuIcon as Bars3Icon,
-  XIcon as XMarkIcon,
-} from '@heroicons/react/outline'
+  BoltIcon as LightningBoltIcon,
+  Bars3Icon,
+  XMarkIcon,
+} from '@heroicons/react/24/outline'
 import ThemeToggle from '../ThemeToggle'
 
 const navigation = [
@@ -20,7 +25,7 @@ const navigation = [
   { name: 'Learning Path', href: '/learning-path', icon: AcademicCapIcon },
   { name: 'Library', href: '/library', icon: BookOpenIcon },
   { name: 'Progress', href: '/progress', icon: ChartBarIcon },
-  { name: 'Community', href: '/community', icon: UserGroupIcon },
+  { name: 'Community', href: '/community', icon: UserIcon },
   { name: 'Settings', href: '/settings', icon: CogIcon },
 ]
 
@@ -45,7 +50,7 @@ export default function Navigation() {
               className="flex items-center space-x-2 text-xl font-bold text-gray-900 dark:text-white"
             >
               <span className="bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent">
-                Indaba AI
+                Maarifa AI
               </span>
             </Link>
           </div>
@@ -106,7 +111,7 @@ export default function Navigation() {
           href="/"
           className="text-lg font-bold text-gray-900 dark:text-white"
         >
-          Indaba AI
+          Maarifa AI
         </Link>
         <ThemeToggle />
       </div>
@@ -135,7 +140,7 @@ export default function Navigation() {
                     href="/"
                     className="text-lg font-bold text-gray-900 dark:text-white"
                   >
-                    Indaba AI
+                    Maarifa AI
                   </Link>
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}

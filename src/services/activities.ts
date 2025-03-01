@@ -1,6 +1,5 @@
 import api from './api'
-import type { Activity, ActivityFilter } from '@/types/activity'
-import type { ActivityProgress } from '@/types/user'
+import type { Activity, ActivityFilter, ActivityProgress } from '@/types/activity'
 
 export const activityService = {
   // Activity retrieval

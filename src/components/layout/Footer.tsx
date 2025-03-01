@@ -14,7 +14,7 @@ const footerNavigation = {
     { name: 'Library', href: '/library' },
   ],
   company: [
-    { name: 'About Indaba', href: '/about' },
+    { name: 'About Maarifa', href: '/about' },
     { name: 'Careers', href: '/careers' },
     { name: 'Ethics & Compliance', href: '/compliance' },
     { name: 'Events', href: '/events' },
@@ -64,7 +64,7 @@ export default function Footer() {
               </ul>
             </div>
             <div>
-              <h3 className="text-sm font-semibold">Indaba AI</h3>
+              <h3 className="text-sm font-semibold">Maarifa AI</h3>
               <ul role="list" className="mt-6 space-y-4">
                 {footerNavigation.company.map((item) => (
                   <li key={item.name}>
@@ -97,7 +97,7 @@ export default function Footer() {
         </div>
         <div className="border-t border-gray-200 py-8 dark:border-gray-800">
           <p className="text-sm text-gray-500">
-            &copy; {new Date().getFullYear()} Indaba AI. All rights reserved.
+            &copy; {new Date().getFullYear()} Maarifa AI. All rights reserved.
           </p>
           <div className="mt-4 flex space-x-6">
             <Link

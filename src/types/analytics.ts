@@ -1,71 +1,114 @@
+export interface AnalyticsData {
+  overview: {
+    activeUsers: number
+    totalLessons: number
+    completionRate: number
+    averageEngagement: number
+  }
+  learningMetrics: {
+    topSubjects: {
+      subject: string
+      students: number
+      completionRate: number
+    }[]
+    skillProgress: {
+      skill: string
+      proficiency: number
+    }[]
+    timeSpent: {
+      date: string
+      minutes: number
+    }[]
+  }
+  engagement: {
+    dailyActive: number
+    weeklyActive: number
+    monthlyActive: number
+    averageSessionTime: number
+  }
+  performance: {
+    averageScore: number
+    skillGrowth: number
+    conceptMastery: number
+    participationRate: number
+  }
+}
+
 export interface TeacherAnalytics {
-  completedActivities: number
-  totalTimeSpent: number
+  totalStudents: number
+  activeStudents: number
+  averageEngagement: number
+  coursesCreated: number
+  resourcesShared: number
   averageRating: number
-  popularActivities: {
-    activityId: string
-    timesUsed: number
-    rating: number
-  }[]
-  recentActivities: {
-    activityId: string
-    completedAt: string
-    studentCount: number
-  }[]
-  studentDemographics: {
-    totalStudents: number
-    ageGroups: Record<string, number>
-    genderSplit: Record<string, number>
-  }
-  regionalStats: {
-    state: string
-    district: string
-    schoolCount: number
-    studentReach: number
-  }
+  lastUpdated: string
 }
 
 export interface SchoolAnalytics {
-  schoolId: string
-  name: string
-  location: {
-    state: string
-    district: string
-  }
-  stats: {
-    totalTeachers: number
-    totalStudents: number
-    activitiesCompleted: number
-    averageEngagement: number
-    popularValues: string[]
-  }
-  timeline: {
-    date: string
-    activities: number
-    teachers: number
-    students: number
-  }[]
+  totalTeachers: number
+  totalStudents: number
+  activeTeachers: number
+  activeStudents: number
+  averageAttendance: number
+  topPerformingClasses: string[]
+  resourceUtilization: number
+  lastUpdated: string
 }
 
 export interface ActivityAnalytics {
-  id: string
-  usage: {
-    total: number
-    byRegion: Record<string, number>
-    byAge: Record<string, number>
-    bySchoolType: Record<string, number>
-  }
-  ratings: {
-    average: number
-    distribution: Record<number, number>
-  }
+  totalParticipants: number
+  completionRate: number
+  averageScore: number
+  timeSpent: number
+  difficulty: 'easy' | 'medium' | 'hard'
+  engagement: number
   feedback: {
     positive: number
+    neutral: number
     negative: number
-    common: string[]
   }
-  adaptations: {
-    used: number
-    popular: string[]
+  lastUpdated: string
+}
+
+export interface LearningAnalytics {
+  studentProgress: {
+    completed: number
+    inProgress: number
+    notStarted: number
   }
+  timeSpent: {
+    total: number
+    average: number
+    byModule: Record<string, number>
+  }
+  performance: {
+    averageScore: number
+    byModule: Record<string, number>
+  }
+  engagement: {
+    daily: number
+    weekly: number
+    monthly: number
+  }
+  lastUpdated: string
+}
+
+export interface ContentAnalytics {
+  views: number
+  downloads: number
+  shares: number
+  averageRating: number
+  completionRate: number
+  timeSpent: number
+  feedback: {
+    helpful: number
+    neutral: number
+    unhelpful: number
+  }
+  demographics: {
+    byAge: Record<string, number>
+    byRegion: Record<string, number>
+    byRole: Record<string, number>
+  }
+  lastUpdated: string
 }

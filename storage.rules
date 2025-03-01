@@ -1,0 +1,64 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isTeacher() {
+      return isAuthenticated() && firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == 'teacher';
+    }
+
+    function isContentCreator() {
+      return isAuthenticated() && firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == 'content_creator';
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // Validate file metadata
+    function isValidImage() {
+      return request.resource.contentType.matches('image/.*')
+        && request.resource.size < 5 * 1024 * 1024; // 5MB
+    }
+
+    function isValidDocument() {
+      return request.resource.contentType.matches('application/pdf')
+        || request.resource.contentType.matches('application/msword')
+        || request.resource.contentType.matches('application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+        && request.resource.size < 20 * 1024 * 1024; // 20MB
+    }
+
+    function isValidVideo() {
+      return request.resource.contentType.matches('video/.*')
+        && request.resource.size < 100 * 1024 * 1024; // 100MB
+    }
+
+    // Course materials folder
+    match /courses/{courseId}/{allPaths=**} {
+      allow read: if true;
+      allow write: if isTeacher() || isAdmin();
+    }
+
+    // Resources folder
+    match /resources/{resourceId}/{allPaths=**} {
+      allow read: if true;
+      allow write: if (isContentCreator() || isTeacher() || isAdmin()) 
+        && (isValidDocument() || isValidImage() || isValidVideo());
+    }
+
+    // User avatars
+    match /avatars/{userId} {
+      allow read: if true;
+      allow write: if isAuthenticated() && request.auth.uid == userId && isValidImage();
+    }
+
+    // Default deny
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

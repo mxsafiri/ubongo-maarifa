@@ -2,14 +2,20 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   HomeIcon,
+  UserIcon,
+  Cog6ToothIcon as CogIcon,
+  ArrowRightOnRectangleIcon as LogoutIcon,
   AcademicCapIcon,
+  CheckBadgeIcon as BadgeCheckIcon,
   BookOpenIcon,
   ChartBarIcon,
-  UserCircleIcon,
-  CogIcon,
-  MenuIcon,
-  XIcon,
-} from '@heroicons/react/outline'
+  ChatBubbleLeftIcon as ChatIcon,
+  ClockIcon,
+  DocumentTextIcon,
+  BoltIcon as LightningBoltIcon,
+  Bars3Icon as MenuIcon,
+  XMarkIcon as XIcon
+} from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import PageTransition from './PageTransition'
@@ -19,7 +25,7 @@ import { useTheme } from '@/context/ThemeContext'
 interface NavItem {
   name: string
   href: string
-  icon: (props: React.ComponentProps<'svg'>) => JSX.Element
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>
 }
 
 const navigation: NavItem[] = [
@@ -27,7 +33,7 @@ const navigation: NavItem[] = [
   { name: 'Activities', href: '/activities', icon: AcademicCapIcon },
   { name: 'Library', href: '/library', icon: BookOpenIcon },
   { name: 'Progress', href: '/progress', icon: ChartBarIcon },
-  { name: 'Profile', href: '/profile', icon: UserCircleIcon },
+  { name: 'Profile', href: '/profile', icon: UserIcon },
   { name: 'Settings', href: '/settings', icon: CogIcon },
 ]
 

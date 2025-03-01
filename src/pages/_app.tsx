@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/context/ThemeContext'
 import { AuthProvider } from '@/context/AuthContext'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Head from 'next/head'
+import { MainLayout } from '@/components/layout/MainLayout'
 
 const inter = Inter({ subsets: ['latin'] })
 const queryClient = new QueryClient()
@@ -25,9 +26,11 @@ export default function App({ Component, pageProps }: AppProps) {
             <meta name="twitter:title" content="Maarifa AI | The AI Backbone for Education" />
             <meta name="twitter:description" content="Your AI-powered learning companion from Ubongo." />
           </Head>
-          <main className={inter.className}>
-            <Component {...pageProps} />
-          </main>
+          <MainLayout>
+            <main className={inter.className}>
+              <Component {...pageProps} />
+            </main>
+          </MainLayout>
         </ThemeProvider>
       </AuthProvider>
     </QueryClientProvider>

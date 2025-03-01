@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { SearchIcon, FilterIcon } from '@heroicons/react/outline'
+import { MagnifyingGlassIcon as SearchIcon, FunnelIcon as FilterIcon } from '@heroicons/react/24/outline'
 
 interface Activity {
   id: string

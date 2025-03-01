@@ -48,7 +48,7 @@ export default function StatsSection() {
             Making a global impact
           </h2>
           <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-400">
-            Join thousands of educators worldwide who are using Indaba AI to bring Olympic values to
+            Join thousands of educators worldwide who are using Maarifa AI to bring Olympic values to
             their classrooms.
           </p>
         </div>

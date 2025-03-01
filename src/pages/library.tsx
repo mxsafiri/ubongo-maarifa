@@ -1,15 +1,15 @@
 import { motion } from 'framer-motion'
 import AppLayout from '@/components/layout/AppLayout'
 import {
-  SearchIcon,
-  FilterIcon,
-  DocumentDownloadIcon,
+  MagnifyingGlassIcon as SearchIcon,
+  FunnelIcon as FilterIcon,
+  ArrowDownTrayIcon as DocumentDownloadIcon,
   BookmarkIcon,
   ShareIcon,
   DocumentDuplicateIcon,
   TagIcon,
-  CollectionIcon,
-} from '@heroicons/react/outline'
+  Square3Stack3DIcon as CollectionIcon,
+} from '@heroicons/react/24/outline'
 import { useState } from 'react'
 
 interface Resource {
@@ -27,11 +27,11 @@ interface Resource {
 const resources: Resource[] = [
   {
     id: '1',
-    title: 'Olympic Values Education Guide',
-    description: 'Comprehensive guide for teaching Olympic values through interactive activities',
+    title: 'Interactive Learning Guide',
+    description: 'Comprehensive guide for teaching core values through interactive activities',
     type: 'PDF',
     category: 'Teaching Guide',
-    tags: ['Olympic Values', 'Education', 'Activities'],
+    tags: ['Core Values', 'Education', 'Activities'],
     downloadCount: 1234,
     fileSize: '2.5 MB',
     lastUpdated: '2025-02-20',
@@ -60,7 +60,7 @@ const categories = [
 ]
 
 const tags = [
-  'Olympic Values',
+  'Core Values',
   'Education',
   'Activities',
   'Ethics',

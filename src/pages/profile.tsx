@@ -1,14 +1,20 @@
 import Layout from '@/components/layout/Layout'
 import { motion } from 'framer-motion'
 import {
-  UserIcon as UserCircleIcon,
+  UserIcon,
+  Cog6ToothIcon as CogIcon,
+  ArrowRightOnRectangleIcon as LogoutIcon,
   AcademicCapIcon,
-  BadgeCheckIcon as TrophyIcon,
+  CheckBadgeIcon as BadgeCheckIcon,
+  BookOpenIcon,
   ChartBarIcon,
-  CogIcon,
+  ChatBubbleLeftIcon as ChatIcon,
+  ClockIcon,
+  DocumentTextIcon,
+  BoltIcon as LightningBoltIcon,
   BellIcon,
-  ShieldCheckIcon,
-} from '@heroicons/react/outline'
+  ShieldCheckIcon
+} from '@heroicons/react/24/outline'
 
 const achievements = [
   {
@@ -16,7 +22,7 @@ const achievements = [
     name: 'Quick Learner',
     description: 'Completed 5 courses in one month',
     date: 'Earned on Feb 15, 2025',
-    icon: TrophyIcon,
+    icon: BadgeCheckIcon,
     color: 'from-yellow-500 to-orange-500',
   },
   {
@@ -42,7 +48,7 @@ const settings = [
     id: 'account',
     name: 'Account Settings',
     description: 'Manage your account details and preferences',
-    icon: UserCircleIcon,
+    icon: UserIcon,
     href: '/settings/account',
   },
   {

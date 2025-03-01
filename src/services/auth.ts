@@ -1,39 +1,121 @@
-import api from './api'
+import { 
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+  GoogleAuthProvider,
+  signInWithPopup,
+  updateProfile,
+  User
+} from 'firebase/auth'
+import { doc, setDoc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore'
+import { auth, db } from '@/lib/firebase'
 import type { UserProfile } from '@/types/user'
 
 export const authService = {
-  // Olympic ID authentication
-  async loginWithOlympicId(code: string) {
-    const response = await api.post('/auth/olympic', { code })
-    return response.data
+  // Authentication service
+  async loginWithEmail(email: string, password: string) {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password)
+    const profile = await this.getUserProfile(userCredential.user.uid)
+    return { user: profile }
   },
 
-  // Profile management
-  async getUserProfile(): Promise<UserProfile> {
-    const response = await api.get('/user/profile')
-    return response.data
+  async loginWithGoogle() {
+    const provider = new GoogleAuthProvider()
+    const userCredential = await signInWithPopup(auth, provider)
+    const profile = await this.getUserProfile(userCredential.user.uid)
+    return { user: profile }
   },
 
-  async updateUserProfile(profile: Partial<UserProfile>): Promise<UserProfile> {
-    const response = await api.put('/user/profile', profile)
-    return response.data
+  async register(data: { email: string; password: string; name: string }) {
+    const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password)
+    
+    // Create user profile
+    await this.createUserProfile(userCredential.user, {
+      name: data.name,
+      email: data.email,
+      role: 'student'
+    })
+
+    return this.getUserProfile(userCredential.user.uid)
   },
 
-  // Preferences
-  async updatePreferences(preferences: UserProfile['preferences']) {
-    const response = await api.put('/user/preferences', preferences)
-    return response.data
+  async createUserProfile(user: User, profile: Partial<UserProfile>) {
+    const userRef = doc(db, 'users', user.uid)
+    await setDoc(userRef, {
+      ...profile,
+      id: user.uid,
+      userId: user.uid,
+      status: 'active',
+      createdAt: new Date().toISOString(),
+      lastLogin: new Date().toISOString(),
+      stats: {
+        lastActive: new Date().toISOString(),
+        loginCount: 1,
+        totalTimeSpent: 0
+      },
+      preferences: {
+        theme: 'light',
+        notifications: {
+          email: true,
+          push: true,
+          sms: false
+        },
+        language: 'en',
+        region: 'EA',
+        accessibility: {
+          fontSize: 'medium',
+          contrast: 'normal',
+          reduceMotion: false
+        }
+      }
+    })
   },
 
-  // Teaching details
-  async updateTeachingDetails(details: UserProfile['teachingDetails']) {
-    const response = await api.put('/user/teaching-details', details)
-    return response.data
+  async getUserProfile(userId: string): Promise<UserProfile> {
+    const userRef = doc(db, 'users', userId)
+    const userDoc = await getDoc(userRef)
+    
+    if (!userDoc.exists()) {
+      throw new Error('User profile not found')
+    }
+
+    return userDoc.data() as UserProfile
+  },
+
+  async updateProfile(data: Partial<UserProfile>) {
+    const user = auth.currentUser
+    if (!user) throw new Error('No authenticated user')
+
+    // Update auth profile if name or avatar is being updated
+    if (data.name || data.avatar) {
+      await updateProfile(user, {
+        displayName: data.name,
+        photoURL: data.avatar
+      })
+    }
+
+    // Update custom profile in Firestore
+    const profileRef = doc(db, 'users', user.uid)
+    await updateDoc(profileRef, {
+      ...data,
+      lastLogin: new Date().toISOString(),
+      'stats.lastActive': new Date().toISOString()
+    })
+
+    return this.getUserProfile(user.uid)
   },
 
   // Session management
   async logout() {
-    await api.post('/auth/logout')
-    localStorage.removeItem('olympic_token')
+    await signOut(auth)
   },
+
+  getCurrentUser() {
+    return new Promise<User | null>((resolve, reject) => {
+      const unsubscribe = auth.onAuthStateChanged(user => {
+        unsubscribe()
+        resolve(user)
+      }, reject)
+    })
+  }
 }

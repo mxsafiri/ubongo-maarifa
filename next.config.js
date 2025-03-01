@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
   reactStrictMode: true,
   env: {
     APP_NAME: 'Maarifa AI',
@@ -7,6 +8,7 @@ const nextConfig = {
     APP_TAGLINE: 'Your AI-Powered Learning Companion'
   },
   images: {
+    unoptimized: true,
     domains: ['images.unsplash.com'],
     formats: ['image/avif', 'image/webp'],
     dangerouslyAllowSVG: true,

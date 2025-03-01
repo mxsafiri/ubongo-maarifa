@@ -2,15 +2,21 @@ import { motion } from 'framer-motion'
 import AppLayout from '@/components/layout/AppLayout'
 import {
   AcademicCapIcon,
-  LightBulbIcon,
-  UserGroupIcon,
-  ChartBarIcon,
-  CheckCircleIcon,
-  ClockIcon,
-  StarIcon,
   ArrowRightIcon,
   LockClosedIcon,
-} from '@heroicons/react/outline'
+  StarIcon,
+  ChevronRightIcon,
+  CheckIcon,
+  BookOpenIcon,
+  ClockIcon,
+  UserIcon,
+  Cog6ToothIcon as CogIcon,
+  ArrowRightOnRectangleIcon as LogoutIcon,
+  CheckBadgeIcon as BadgeCheckIcon,
+  ChatBubbleLeftIcon as ChatIcon,
+  DocumentTextIcon,
+  BoltIcon as LightningBoltIcon
+} from '@heroicons/react/24/outline'
 import { useState } from 'react'
 
 interface Module {
@@ -21,7 +27,7 @@ interface Module {
   level: 'Beginner' | 'Intermediate' | 'Advanced'
   status: 'completed' | 'in-progress' | 'locked'
   progress: number
-  icon: (props: React.ComponentProps<'svg'>) => JSX.Element
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>
   prerequisites: string[]
   skills: string[]
 }
@@ -29,38 +35,38 @@ interface Module {
 const modules: Module[] = [
   {
     id: '1',
-    title: 'Olympic Values Foundation',
-    description: 'Learn the fundamental values and principles of the Olympic movement',
+    title: 'Educational Foundations',
+    description: 'Learn the fundamental principles of effective teaching and learning',
     duration: '4 weeks',
     level: 'Beginner',
     status: 'completed',
     progress: 100,
     icon: AcademicCapIcon,
     prerequisites: [],
-    skills: ['Olympic History', 'Core Values', 'Ethics in Sport'],
+    skills: ['Teaching Methods', 'Core Values', 'Ethics in Education'],
   },
   {
     id: '2',
-    title: 'Sports Leadership',
-    description: 'Develop leadership skills through Olympic education',
+    title: 'Educational Leadership',
+    description: 'Develop leadership skills through innovative education',
     duration: '6 weeks',
     level: 'Intermediate',
     status: 'in-progress',
     progress: 60,
-    icon: UserGroupIcon,
-    prerequisites: ['Olympic Values Foundation'],
+    icon: ChevronRightIcon,
+    prerequisites: ['Educational Foundations'],
     skills: ['Leadership', 'Team Management', 'Communication'],
   },
   {
     id: '3',
-    title: 'Advanced Olympic Studies',
-    description: 'Deep dive into Olympic movement and its impact',
+    title: 'Advanced Teaching Studies',
+    description: 'Deep dive into modern educational practices and their impact',
     duration: '8 weeks',
     level: 'Advanced',
     status: 'locked',
     progress: 0,
-    icon: LightBulbIcon,
-    prerequisites: ['Sports Leadership'],
+    icon: LockClosedIcon,
+    prerequisites: ['Educational Leadership'],
     skills: ['Research', 'Analysis', 'Strategic Planning'],
   },
 ]
@@ -69,14 +75,14 @@ const stats = [
   {
     name: 'Completion Rate',
     value: '85%',
-    icon: ChartBarIcon,
+    icon: ChevronRightIcon,
     change: '+12%',
     trend: 'up',
   },
   {
     name: 'Active Modules',
     value: '3',
-    icon: LightBulbIcon,
+    icon: AcademicCapIcon,
     change: '+1',
     trend: 'up',
   },
@@ -115,7 +121,7 @@ export default function LearningPath() {
             <div>
               <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Learning Path</h1>
               <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                Your personalized journey through Olympic education
+                Your personalized journey through interactive education
               </p>
             </div>
             <button className="rounded-md bg-primary-600 px-4 py-2 text-sm font-medium text-white hover:bg-primary-700">

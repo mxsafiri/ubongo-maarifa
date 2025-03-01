@@ -45,11 +45,28 @@
   h3 {
     @apply text-xl font-semibold text-text-primary;
   }
+
+  /* Scrollbar Styles */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-background-card;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-400 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-500;
+  }
 }
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-lg font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500;
+    @apply inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-lg font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary;
   }
 
   .btn-primary {
@@ -61,15 +78,15 @@
   }
 
   .card {
-    @apply bg-card-background rounded-xl border border-border p-6 shadow-sm transition-all duration-200 hover:shadow-md;
+    @apply bg-background-card rounded-xl border border-border p-6 shadow-sm transition-all duration-200 hover:shadow-md;
   }
 
   .nav-link {
-    @apply flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-gray-400 transition-colors hover:bg-card-hover hover:text-white;
+    @apply flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-gray-400 transition-colors hover:bg-background-hover hover:text-white;
   }
 
   .nav-link.active {
-    @apply bg-card-hover text-white;
+    @apply bg-background-hover text-white;
   }
 
   .input {
@@ -98,25 +115,4 @@
 @keyframes slideUp {
   from { transform: translateY(20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-out;
-}
-
-.animate-slide-up {
-  animation: slideUp 0.5s ease-out;
-}
-
-/* Custom scrollbar styles */
-::-webkit-scrollbar {
-  @apply w-2;
-}
-
-::-webkit-scrollbar-track {
-  @apply bg-card-background;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-gray-400 rounded-full hover:bg-gray-500;
 }

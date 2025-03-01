@@ -6,22 +6,36 @@ import FloatingNav from '@/components/navigation/FloatingNav'
 import Card from '@/components/ui/Card'
 import StatsSection from '@/components/sections/StatsSection'
 import TestimonialsSection from '@/components/sections/TestimonialsSection'
+import {
+  HomeIcon,
+  UserIcon,
+  Cog6ToothIcon as CogIcon,
+  ArrowRightOnRectangleIcon as LogoutIcon,
+  AcademicCapIcon,
+  CheckBadgeIcon as BadgeCheckIcon,
+  BookOpenIcon,
+  ChartBarIcon,
+  ChatBubbleLeftIcon as ChatIcon,
+  ClockIcon,
+  DocumentTextIcon,
+  BoltIcon as LightningBoltIcon
+} from '@heroicons/react/24/outline'
 
 export default function Home() {
   return (
     <>
       <Head>
-        <title>Indaba AI - Olympic Values Education Programme</title>
+        <title>Maarifa AI - Interactive Learning Platform</title>
         <meta
           name="description"
-          content="Empowering educators and students through Olympic values and education"
+          content="Empowering educators and students through interactive and engaging educational content"
         />
       </Head>
 
       <ParallaxHero
-        title="Inspiring Olympic Values in Education"
-        subtitle="Transform your teaching with AI-powered Olympic education resources. Join educators worldwide in bringing Olympic values to life in your classroom."
-        image="/images/hero-olympics.jpg"
+        title="Inspiring Young Minds Through Education"
+        subtitle="Transform your teaching with AI-powered educational resources. Join educators worldwide in bringing engaging learning experiences to life in your classroom."
+        image="/images/hero-education.jpg"
       />
 
       <FeatureGrid />
@@ -42,7 +56,7 @@ export default function Home() {
               viewport={{ once: true }}
               className="text-3xl font-display font-bold text-gray-900 dark:text-white sm:text-4xl"
             >
-              Start your Olympic journey
+              Start your learning journey
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -51,7 +65,7 @@ export default function Home() {
               transition={{ delay: 0.1 }}
               className="mt-4 max-w-2xl mx-auto text-xl text-gray-500 dark:text-gray-400"
             >
-              Choose your path and begin inspiring the next generation with Olympic values
+              Choose your path and begin inspiring the next generation with interactive education
             </motion.p>
           </div>
 
@@ -66,14 +80,14 @@ export default function Home() {
               />
               <Card
                 title="For Students"
-                subtitle="Engage with interactive content and learn about Olympic values through fun activities"
+                subtitle="Engage with interactive content and learn through fun activities"
                 image="/images/students.jpg"
                 color="green"
                 link="/students"
               />
               <Card
                 title="For Schools"
-                subtitle="Implement Olympic education programs across your entire institution"
+                subtitle="Implement educational programs across your entire institution"
                 image="/images/schools.jpg"
                 color="pink"
                 link="/schools"

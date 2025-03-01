@@ -6,10 +6,10 @@ export default function LoginPage() {
   return (
     <>
       <Head>
-        <title>Login - Indaba AI</title>
+        <title>Login - Maarifa AI</title>
         <meta
           name="description"
-          content="Log in to access Olympic-themed educational resources and activities"
+          content="Log in to access our comprehensive educational resources and activities"
         />
       </Head>
 
@@ -19,10 +19,10 @@ export default function LoginPage() {
             <div>
               <img className="mx-auto h-12 w-auto" src="/logo-white.svg" alt="Indaba" />
               <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-white">
-                Welcome to Indaba AI
+                Welcome to Maarifa AI
               </h2>
               <p className="mt-2 text-center text-sm text-gray-200">
-                Olympic Values Education Programme
+                Interactive Learning Platform
               </p>
             </div>
 

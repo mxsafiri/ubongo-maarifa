@@ -1,15 +1,24 @@
 import { motion } from 'framer-motion'
 import AppLayout from '@/components/layout/AppLayout'
 import {
+  ArrowTrendingUpIcon as TrendingUpIcon,
   ChartBarIcon,
-  ClockIcon,
-  TrendingUpIcon,
-  AcademicCapIcon,
-  UserGroupIcon,
   CheckCircleIcon,
   ExclamationCircleIcon,
   CalendarIcon,
-} from '@heroicons/react/outline'
+  HomeIcon,
+  UserIcon,
+  Cog6ToothIcon as CogIcon,
+  ArrowRightOnRectangleIcon as LogoutIcon,
+  CheckBadgeIcon as BadgeCheckIcon,
+  BookOpenIcon,
+  ChatBubbleLeftIcon as ChatIcon,
+  DocumentTextIcon,
+  BoltIcon as LightningBoltIcon,
+  AcademicCapIcon,
+  UserGroupIcon,
+  ClockIcon
+} from '@heroicons/react/24/outline'
 import { useState } from 'react'
 
 interface ProgressData {
@@ -27,7 +36,7 @@ const progressData: ProgressData[] = [
   {
     id: '1',
     student: 'Alex Johnson',
-    course: 'Olympic Values and Ethics',
+    course: 'Values and Ethics in Education',
     progress: 85,
     lastActivity: '2 hours ago',
     timeSpent: '12h 30m',

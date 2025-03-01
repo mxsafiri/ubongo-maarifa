@@ -1,15 +1,18 @@
 import { motion } from 'framer-motion'
 import AppLayout from '@/components/layout/AppLayout'
 import {
-  LightBulbIcon,
   UserIcon,
+  Cog6ToothIcon as CogIcon,
+  ArrowRightOnRectangleIcon as LogoutIcon,
   AcademicCapIcon,
-  ClockIcon,
-  TagIcon,
+  CheckBadgeIcon as BadgeCheckIcon,
+  BookOpenIcon,
   ChartBarIcon,
-  FilterIcon,
-  AdjustmentsIcon,
-} from '@heroicons/react/outline'
+  ChatBubbleLeftIcon as ChatIcon,
+  ClockIcon,
+  DocumentTextIcon,
+  BoltIcon as LightningBoltIcon
+} from '@heroicons/react/24/outline'
 import { useState } from 'react'
 
 interface Activity {
@@ -28,8 +31,8 @@ interface Activity {
 const activities: Activity[] = [
   {
     id: '1',
-    title: 'Olympic Values in Daily Life',
-    description: 'Interactive workshop exploring how Olympic values apply to everyday situations',
+    title: 'Core Values in Daily Life',
+    description: 'Interactive workshop exploring how core values apply to everyday situations',
     difficulty: 'Beginner',
     duration: '45 mins',
     category: 'Values Education',

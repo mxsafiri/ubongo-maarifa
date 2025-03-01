@@ -2,40 +2,31 @@ export interface Activity {
   id: string
   title: string
   description: string
-  type: 'physical' | 'educational' | 'values' | 'mixed'
-  duration: number // in minutes
-  targetAge: {
-    min: number
-    max: number
-  }
-  difficulty: 'beginner' | 'intermediate' | 'advanced'
-  materials: string[]
+  type: 'lesson' | 'quiz' | 'project' | 'workshop'
+  subject: string
+  grade: string
+  difficulty: 'Beginner' | 'Intermediate' | 'Advanced'
+  duration: string
   objectives: string[]
-  olympicValues: string[]
-  content: {
-    warmUp: string
-    mainActivity: string
-    coolDown: string
-    adaptations: string[]
-    variations: string[]
+  materials: string[]
+  instructions: string[]
+  assessment: {
+    type: 'self' | 'peer' | 'teacher'
+    criteria: string[]
+    rubric?: string
   }
-  media: {
-    images: string[]
-    videos: string[]
-    documents: string[]
-  }
+  resources: {
+    title: string
+    type: 'video' | 'document' | 'link'
+    url: string
+  }[]
   metadata: {
-    created: string
-    lastModified: string
-    language: string
+    author: string
+    createdAt: string
+    updatedAt: string
+    views: number
+    rating: number
     tags: string[]
-    category: string[]
-  }
-  stats: {
-    timesUsed: number
-    averageRating: number
-    totalFeedback: number
-    popularRegions: string[]
   }
 }
 
@@ -54,4 +45,18 @@ export interface ActivityFilter {
   language?: string[]
   category?: string[]
   tags?: string[]
+}
+
+export interface ActivityProgress {
+  activityId: string
+  userId: string
+  status: 'not_started' | 'in_progress' | 'completed'
+  progress: number
+  startedAt: string
+  lastUpdated: string
+  completedAt?: string
+  score?: number
+  feedback?: string
+  timeSpent: number
+  attempts: number
 }

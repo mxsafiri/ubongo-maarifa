@@ -1,17 +1,18 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useAuth } from '@/context/AuthContext'
+import type { UserRole } from '@/types/user'
 
 interface ProtectedRouteProps {
   children: React.ReactNode
-  requiredRole?: 'admin' | 'teacher' | 'editor'
+  requiredRole?: UserRole
 }
 
 export default function ProtectedRoute({
   children,
   requiredRole,
 }: ProtectedRouteProps) {
-  const { user, loading } = useAuth()
+  const { user, userProfile, loading } = useAuth()
   const router = useRouter()
 
   useEffect(() => {
@@ -20,15 +21,15 @@ export default function ProtectedRoute({
       return
     }
 
-    if (!loading && requiredRole && user?.role !== requiredRole) {
+    if (!loading && requiredRole && userProfile?.role !== requiredRole) {
       router.push('/dashboard')
     }
-  }, [user, loading, requiredRole, router])
+  }, [user, userProfile, loading, requiredRole, router])
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-primary-500"></div>
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-primary"></div>
       </div>
     )
   }
@@ -37,7 +38,7 @@ export default function ProtectedRoute({
     return null
   }
 
-  if (requiredRole && user.role !== requiredRole) {
+  if (requiredRole && userProfile?.role !== requiredRole) {
     return null
   }
 
