@@ -1,7 +1,10 @@
+'use client';
+
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 import {
   HomeIcon,
   UserIcon,
@@ -29,13 +32,13 @@ const navigation = [
   { name: 'Settings', href: '/settings', icon: CogIcon },
 ]
 
-export default function Navigation() {
+export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const router = useRouter()
+  const pathname = usePathname()
 
   const isCurrentPath = (path: string) => {
-    return router.pathname === path
+    return pathname === path
   }
 
   return (
