@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Remove the output: 'export' for Vercel deployment
+  // Enable static export for Netlify
+  output: 'export',
   reactStrictMode: true,
   env: {
     APP_NAME: 'Maarifa AI',
