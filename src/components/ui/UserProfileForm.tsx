@@ -147,11 +147,19 @@ function getDefaultProfileForRole(role: UserRole): Partial<UserProfile> {
 }
 
 export function UserProfileForm({ initialData, onSubmit, onCancel, mode }: UserProfileFormProps) {
-  const [formData, setFormData] = useState<Partial<UserProfile | AdminProfile>>(() => {
+  // Use a more flexible type for formData
+  const [formData, setFormData] = useState<any>(() => {
     if (initialData?.role === 'admin') {
       return initialData as Partial<AdminProfile>
     }
-    return initialData || getDefaultProfileForRole(initialData?.role || 'student')
+    
+    // Default to student role if no initialData or role is provided
+    const defaultRole: UserRole = 'student'
+    const role: UserRole = initialData && 'role' in initialData && typeof initialData.role === 'string' 
+      ? initialData.role as UserRole 
+      : defaultRole
+      
+    return initialData || getDefaultProfileForRole(role)
   })
 
   useEffect(() => {
@@ -412,7 +420,7 @@ export function UserProfileForm({ initialData, onSubmit, onCancel, mode }: UserP
             <h3 className="font-medium">Administrator Details</h3>
             <div className="grid gap-4 md:grid-cols-2">
               <div>
-                <label className="text-sm font-medium">Admin Level</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700">Admin Level</label>
                 <Select
                   value={(formData as Partial<AdminProfile>)?.adminLevel || 'regular'}
                   onChange={(value) =>
@@ -576,7 +584,7 @@ export function UserProfileForm({ initialData, onSubmit, onCancel, mode }: UserP
           <div>
             <label className="mb-2 block text-sm font-medium text-gray-700">Role</label>
             <Select
-              value={formData.role}
+              value={formData.role || 'student'}
               onChange={handleRoleChange}
               disabled={mode === 'edit'}
               options={roleOptions}

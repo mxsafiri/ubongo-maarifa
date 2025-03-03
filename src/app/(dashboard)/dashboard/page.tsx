@@ -1,11 +1,25 @@
 'use client';
 
-import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { Book, Clock, Users, Video } from 'lucide-react';
-import { QuickActions } from '@/components/dashboard/quick-actions';
+import { 
+  BookOpen, 
+  Users, 
+  Calendar, 
+  TrendingUp, 
+  Bell, 
+  Clock,
+  ChevronRight,
+  BarChart
+} from 'lucide-react';
 import { UpcomingTasks } from '@/components/dashboard/upcoming-tasks';
 import { StudentEngagement } from '@/components/dashboard/student-engagement';
+import { QuickActions } from '@/components/dashboard/quick-actions';
+
+import { useState } from 'react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Badge } from '@/components/ui/badge';
 
 const courses = [
   {
@@ -56,7 +70,7 @@ const stats = [
   {
     label: 'Course Progress',
     value: '62%',
-    icon: Book,
+    icon: BookOpen,
     trend: '+5% improvement',
   },
   {
@@ -68,7 +82,7 @@ const stats = [
   {
     label: 'Video Lessons',
     value: '18',
-    icon: Video,
+    icon: ChevronRight,
     trend: '3 new this month',
   },
 ];
@@ -123,7 +137,7 @@ export default function DashboardPage() {
                   <CardContent className="p-0">
                     <div className="aspect-video overflow-hidden bg-muted">
                       <div className="flex h-full items-center justify-center bg-primary/5">
-                        <Book className="h-8 w-8 text-primary/40" />
+                        <BookOpen className="h-8 w-8 text-primary/40" />
                       </div>
                     </div>
                     <div className="space-y-4 p-6">

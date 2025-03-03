@@ -1,4 +1,4 @@
-import { collection, doc, addDoc, updateDoc, deleteDoc, getDocs, getDoc, query, where, orderBy, CollectionReference } from 'firebase/firestore'
+import { collection, doc, addDoc, updateDoc, deleteDoc, getDocs, getDoc, query, where, orderBy, CollectionReference, DocumentData } from 'firebase/firestore'
 import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage'
 import { db, storage } from '@/config/firebase'
 import type { LocalResource } from '@/types/resource'
@@ -12,6 +12,7 @@ export const resourceService = {
       downloadCount: 0
     }
     
+    if (!db) throw new Error('Firebase database not initialized');
     const docRef = await addDoc(collection(db, 'resources'), resourceData)
     return {
       ...resourceData,
@@ -20,6 +21,7 @@ export const resourceService = {
   },
 
   async updateResource(id: string, data: Partial<LocalResource>): Promise<void> {
+    if (!db) throw new Error('Firebase database not initialized');
     const resourceRef = doc(db, 'resources', id)
     await updateDoc(resourceRef, {
       ...data,
@@ -28,11 +30,13 @@ export const resourceService = {
   },
 
   async deleteResource(id: string): Promise<void> {
+    if (!db) throw new Error('Firebase database not initialized');
     const resourceRef = doc(db, 'resources', id)
     const resource = await getDoc(resourceRef)
     
     if (resource.exists()) {
       // Delete the file from storage if it exists
+      if (!storage) throw new Error('Firebase storage not initialized');
       const storageRef = ref(storage, `resources/${id}`)
       try {
         await deleteObject(storageRef)
@@ -46,6 +50,7 @@ export const resourceService = {
   },
 
   async getResources(courseId?: string): Promise<LocalResource[]> {
+    if (!db) throw new Error('Firebase database not initialized');
     const resourcesRef = collection(db, 'resources') as CollectionReference<LocalResource>
     let queryRef = query(resourcesRef)
     
@@ -63,6 +68,7 @@ export const resourceService = {
   },
 
   async getResource(id: string): Promise<LocalResource | null> {
+    if (!db) throw new Error('Firebase database not initialized');
     const resourceRef = doc(db, 'resources', id)
     const resource = await getDoc(resourceRef)
     
@@ -77,12 +83,14 @@ export const resourceService = {
   },
 
   async uploadFile(file: File, path: string): Promise<string> {
+    if (!storage) throw new Error('Firebase storage not initialized');
     const storageRef = ref(storage, path)
     await uploadBytes(storageRef, file)
     return getDownloadURL(storageRef)
   },
 
   async incrementDownloadCount(id: string): Promise<void> {
+    if (!db) throw new Error('Firebase database not initialized');
     const resourceRef = doc(db, 'resources', id)
     const resource = await getDoc(resourceRef)
     

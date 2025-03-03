@@ -4,6 +4,7 @@ import type { Course } from '@/types/course'
 
 export const courseService = {
   async createCourse(course: Omit<Course, 'id' | 'lastModified'>): Promise<Course> {
+    if (!db) throw new Error('Firebase database not initialized');
     const courseData = {
       ...course,
       lastModified: new Date()
@@ -17,6 +18,7 @@ export const courseService = {
   },
 
   async updateCourse(id: string, data: Partial<Course>): Promise<void> {
+    if (!db) throw new Error('Firebase database not initialized');
     const courseRef = doc(db, 'courses', id)
     await updateDoc(courseRef, {
       ...data,
@@ -25,11 +27,13 @@ export const courseService = {
   },
 
   async deleteCourse(id: string): Promise<void> {
+    if (!db) throw new Error('Firebase database not initialized');
     const courseRef = doc(db, 'courses', id)
     await deleteDoc(courseRef)
   },
 
   async getCourses(filters?: { category?: string; level?: Course['level']; status?: Course['status'] }): Promise<Course[]> {
+    if (!db) throw new Error('Firebase database not initialized');
     const coursesRef = collection(db, 'courses') as CollectionReference<Course>
     let queryRef = query(coursesRef)
     
@@ -55,6 +59,7 @@ export const courseService = {
   },
 
   async getCourse(id: string): Promise<Course | null> {
+    if (!db) throw new Error('Firebase database not initialized');
     const courseRef = doc(db, 'courses', id)
     const course = await getDoc(courseRef)
     

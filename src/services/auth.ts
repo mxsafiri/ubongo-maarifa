@@ -14,12 +14,14 @@ import type { UserProfile } from '@/types/user'
 export const authService = {
   // Authentication service
   async loginWithEmail(email: string, password: string) {
+    if (!auth) throw new Error('Firebase auth not initialized');
     const userCredential = await signInWithEmailAndPassword(auth, email, password)
     const profile = await this.getUserProfile(userCredential.user.uid)
     return { user: profile }
   },
 
   async loginWithGoogle() {
+    if (!auth) throw new Error('Firebase auth not initialized');
     const provider = new GoogleAuthProvider()
     const userCredential = await signInWithPopup(auth, provider)
     const profile = await this.getUserProfile(userCredential.user.uid)
@@ -27,6 +29,7 @@ export const authService = {
   },
 
   async register(data: { email: string; password: string; name: string }) {
+    if (!auth) throw new Error('Firebase auth not initialized');
     const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password)
     
     // Create user profile
@@ -40,6 +43,7 @@ export const authService = {
   },
 
   async createUserProfile(user: User, profile: Partial<UserProfile>) {
+    if (!db) throw new Error('Firebase database not initialized');
     const userRef = doc(db, 'users', user.uid)
     await setDoc(userRef, {
       ...profile,
@@ -72,6 +76,7 @@ export const authService = {
   },
 
   async getUserProfile(userId: string): Promise<UserProfile> {
+    if (!db) throw new Error('Firebase database not initialized');
     const userRef = doc(db, 'users', userId)
     const userDoc = await getDoc(userRef)
     
@@ -83,6 +88,7 @@ export const authService = {
   },
 
   async updateProfile(data: Partial<UserProfile>) {
+    if (!auth) throw new Error('Firebase auth not initialized');
     const user = auth.currentUser
     if (!user) throw new Error('No authenticated user')
 
@@ -95,6 +101,7 @@ export const authService = {
     }
 
     // Update custom profile in Firestore
+    if (!db) throw new Error('Firebase database not initialized');
     const profileRef = doc(db, 'users', user.uid)
     await updateDoc(profileRef, {
       ...data,
@@ -107,12 +114,17 @@ export const authService = {
 
   // Session management
   async logout() {
+    if (!auth) throw new Error('Firebase auth not initialized');
     await signOut(auth)
   },
 
   getCurrentUser() {
+    if (!auth) {
+      return Promise.resolve(null);
+    }
+    
     return new Promise<User | null>((resolve, reject) => {
-      const unsubscribe = auth.onAuthStateChanged(user => {
+      const unsubscribe = auth!.onAuthStateChanged(user => {
         unsubscribe()
         resolve(user)
       }, reject)

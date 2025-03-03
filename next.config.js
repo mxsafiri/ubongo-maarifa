@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // Remove the output: 'export' for Vercel deployment
   reactStrictMode: true,
   env: {
     APP_NAME: 'Maarifa AI',

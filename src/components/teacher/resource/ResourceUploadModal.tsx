@@ -28,14 +28,14 @@ interface ResourceUploadModalProps {
 }
 
 const RESOURCE_TYPES = [
-  { id: 'video', name: 'Video', accept: { 'video/*': [] } },
+  { id: 'video', name: 'Video', accept: { 'video/*': ['.mp4', '.webm', '.mov'] } as Record<string, string[]> },
   { id: 'document', name: 'Document', accept: {
-    'application/pdf': [],
-    'application/msword': [],
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document': [],
-  }},
-  { id: 'image', name: 'Image', accept: { 'image/*': [] } },
-  { id: 'audio', name: 'Audio', accept: { 'audio/*': [] } },
+    'application/pdf': ['.pdf'],
+    'application/msword': ['.doc'],
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document': ['.docx'],
+  } as Record<string, string[]> },
+  { id: 'image', name: 'Image', accept: { 'image/*': ['.png', '.jpg', '.jpeg'] } as Record<string, string[]> },
+  { id: 'audio', name: 'Audio', accept: { 'audio/*': ['.mp3', '.wav'] } as Record<string, string[]> },
 ];
 
 const SUBJECTS = [
@@ -55,7 +55,7 @@ export function ResourceUploadModal({ onResourceUpload }: ResourceUploadModalPro
     description: '',
     subject: '',
     tags: '',
-    files: [],
+    files: [] as File[],
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -71,7 +71,10 @@ export function ResourceUploadModal({ onResourceUpload }: ResourceUploadModalPro
     setOpen(false);
   };
 
-  const selectedTypeConfig = RESOURCE_TYPES.find(type => type.id === resourceType);
+  const selectedTypeConfig = RESOURCE_TYPES.find(type => type.id === resourceType) || RESOURCE_TYPES[0];
+  
+  // Ensure accept prop is always a valid Record<string, string[]>
+  const acceptProp = selectedTypeConfig ? selectedTypeConfig.accept : { 'image/*': ['.png', '.jpg', '.jpeg'] };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -159,8 +162,11 @@ export function ResourceUploadModal({ onResourceUpload }: ResourceUploadModalPro
               <div>
                 <Label>Upload Files</Label>
                 <MediaUploader
-                  onUpload={(files) => setResourceData({ ...resourceData, files })}
-                  accept={selectedTypeConfig.accept}
+                  onUpload={async (files) => {
+                    setResourceData({ ...resourceData, files });
+                    return Promise.resolve();
+                  }}
+                  accept={acceptProp}
                   maxSize={100 * 1024 * 1024} // 100MB
                 />
               </div>

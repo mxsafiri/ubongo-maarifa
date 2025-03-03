@@ -2,15 +2,9 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { MediaUploader } from '@/components/ui/MediaUploader';
 import { BookOpen, Video, FileText, Wand2 } from 'lucide-react';
@@ -138,9 +132,22 @@ export function CreateLessonModal({ onLessonCreate }: CreateLessonModalProps) {
                   <div className="text-sm text-muted-foreground mb-2">
                     Learning Materials (PDFs, Documents, Images)
                   </div>
+                  <div>
+                    <Label htmlFor="resources">Resources</Label>
+                    <div className="mt-1 text-sm text-gray-500">
+                      Upload lesson materials, worksheets, or presentations
+                    </div>
+                  </div>
                   <MediaUploader
-                    onUpload={(files) => setLessonData({ ...lessonData, resources: files })}
-                    accept="application/pdf,image/*,.doc,.docx"
+                    onUpload={async (files) => {
+                      setLessonData({ ...lessonData, resources: files });
+                      return Promise.resolve();
+                    }}
+                    accept={{
+                      'application/pdf': ['.pdf'],
+                      'image/*': ['.png', '.jpg', '.jpeg'],
+                      'application/msword': ['.doc', '.docx'],
+                    }}
                   />
                 </div>
 
@@ -149,13 +156,14 @@ export function CreateLessonModal({ onLessonCreate }: CreateLessonModalProps) {
                     Video Content (Optional)
                   </div>
                   <MediaUploader
-                    onUpload={(files) => {
+                    onUpload={async (files) => {
                       if (files[0]) {
                         // In a real app, you'd upload this to a video hosting service
                         setLessonData({ ...lessonData, videoUrl: URL.createObjectURL(files[0]) });
                       }
+                      return Promise.resolve();
                     }}
-                    accept="video/*"
+                    accept={{ 'video/*': ['.mp4', '.webm', '.mov'] }}
                   />
                 </div>
               </div>

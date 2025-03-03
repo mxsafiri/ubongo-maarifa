@@ -196,7 +196,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
-  const updateUserProfile = async (data: Partial<UserProfile>) => {
+  const updateUserProfile = async (data: Partial<UserProfile>): Promise<void> => {
     try {
       if (!user) throw new Error('No user logged in')
       
@@ -206,8 +206,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       // Refresh user profile
       const updatedProfile = await fetchUserProfile(user.uid)
       setUserProfile(updatedProfile)
-      
-      return updatedProfile
     } catch (err) {
       setError('Profile update failed')
       throw err
@@ -231,7 +229,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         logout, 
         register,
         resetPassword,
-        updateUserProfile: updateUserProfile,
+        updateUserProfile,
         isAuthenticated,
         isAuthorized
       }}

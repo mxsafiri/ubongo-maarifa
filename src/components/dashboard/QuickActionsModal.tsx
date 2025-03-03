@@ -61,7 +61,7 @@ export function QuickActionsModal() {
   const [classData, setClassData] = useState({
     title: '',
     description: '',
-    date: null as Date | null,
+    date: undefined as Date | undefined,
     startTime: '',
     endTime: '',
     recurring: false,
@@ -209,9 +209,21 @@ export function QuickActionsModal() {
                   onChange={(e) => setResourceData({ ...resourceData, description: e.target.value })}
                 />
               </div>
+              <div>
+                <h3 className="mb-2 text-lg font-medium">Upload Files</h3>
+              </div>
               <MediaUploader
-                onUpload={(files) => console.log('Files uploaded:', files)}
-                accept={resourceData.type === 'video' ? 'video/*' : resourceData.type === 'audio' ? 'audio/*' : 'image/*,application/pdf'}
+                onUpload={async (files) => {
+                  console.log('Files uploaded:', files);
+                  return Promise.resolve();
+                }}
+                accept={
+                  resourceData.type === 'video' 
+                    ? { 'video/*': ['.mp4', '.webm'] } 
+                    : resourceData.type === 'audio' 
+                      ? { 'audio/*': ['.mp3', '.wav'] } 
+                      : { 'image/*': ['.png', '.jpg', '.jpeg'], 'application/pdf': ['.pdf'] }
+                }
               />
               <Button onClick={() => handleSubmit('resource')}>Upload Resource</Button>
             </div>

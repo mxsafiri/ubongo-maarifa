@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { db } from '@/lib/firebase'; // Adjust the import based on your Firebase setup
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, DocumentData } from 'firebase/firestore';
 
 export function LessonPage() {
   const router = useRouter();
   const { lessonId } = router.query;
-  const [lesson, setLesson] = useState(null);
+  const [lesson, setLesson] = useState<DocumentData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchLesson = async () => {
       if (!lessonId) return;
-      const lessonDoc = doc(db, 'lessons', lessonId);
+      const lessonDoc = doc(db, 'lessons', lessonId.toString());
       const lessonSnapshot = await getDoc(lessonDoc);
       if (lessonSnapshot.exists()) {
         setLesson(lessonSnapshot.data());

@@ -1,20 +1,22 @@
 'use client';
 
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Progress } from '@/components/ui/progress';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
-import {
-  TrendingUp,
-  Users,
-  Clock,
+import { 
+  BarChart, 
+  LineChart, 
+  PieChart, 
+  Calendar, 
+  TrendingUp, 
+  Users, 
+  Clock, 
+  Award,
   BookOpen,
-  Brain,
   Target,
   ArrowUp,
   ArrowDown

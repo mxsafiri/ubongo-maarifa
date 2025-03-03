@@ -1,11 +1,23 @@
 'use client';
 
-import { LessonCreator } from '@/components/teacher/lesson/LessonCreator';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
-import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { 
+  Search, 
+  Filter, 
+  BookOpen, 
+  Calendar, 
+  Clock, 
+  Users,
+  Plus,
+  Grid,
+  List
+} from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
-import { Clock, Users, Book } from 'lucide-react';
 
 export default function LessonsPage() {
   const stats = [
@@ -54,7 +66,6 @@ export default function LessonsPage() {
             Create and manage engaging learning experiences
           </p>
         </div>
-        <LessonCreator />
       </div>
 
       {/* Search and Filters */}
