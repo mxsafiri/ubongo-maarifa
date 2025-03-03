@@ -12,7 +12,12 @@
   NEXT_PUBLIC_FIREBASE_APP_ID = "placeholder"
   NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID = "placeholder"
 
+# Handle Next.js routing
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# These redirects ensure that all routes get handled by the Next.js app
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to = "/.netlify/functions/next"
   status = 200
