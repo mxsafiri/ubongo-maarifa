@@ -1,57 +1,68 @@
 'use client';
 
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-[#0A1017]">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="flex min-h-[80vh] flex-col items-center justify-center text-center">
-          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
-            ECD Platform
+    <div className="flex min-h-screen flex-col">
+      {/* Hero Section */}
+      <main className="flex-1">
+        <div className="container flex min-h-screen flex-col items-center justify-center gap-4 py-10 text-center">
+          <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
+            Ubongo Maarifa
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-400">
-            A simple and effective platform for early childhood development educators.
-            Manage lessons, track student progress, and create engaging learning experiences.
+          <p className="mx-auto max-w-[700px] text-gray-500 dark:text-gray-400 md:text-xl">
+            Empowering early childhood educators with simple, effective digital tools
           </p>
-          <div className="mt-10 flex gap-4">
-            <Link
-              href="/dashboard"
-              className="rounded-lg bg-blue-500 px-8 py-3 text-lg font-medium text-white transition-colors hover:bg-blue-600"
-            >
-              Go to Dashboard
-            </Link>
-            <Link
-              href="/lessons"
-              className="rounded-lg bg-gray-800 px-8 py-3 text-lg font-medium text-white transition-colors hover:bg-gray-700"
-            >
-              View Lessons
-            </Link>
-          </div>
-
-          {/* Key Features */}
-          <div className="mt-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="rounded-lg bg-gray-800/50 p-6 text-left">
-              <h3 className="text-xl font-semibold text-white">Easy Lesson Planning</h3>
-              <p className="mt-2 text-gray-400">
-                Create and manage your lessons with our intuitive interface designed for educators.
-              </p>
-            </div>
-            <div className="rounded-lg bg-gray-800/50 p-6 text-left">
-              <h3 className="text-xl font-semibold text-white">Student Progress</h3>
-              <p className="mt-2 text-gray-400">
-                Track individual student development and identify areas needing support.
-              </p>
-            </div>
-            <div className="rounded-lg bg-gray-800/50 p-6 text-left">
-              <h3 className="text-xl font-semibold text-white">Learning Resources</h3>
-              <p className="mt-2 text-gray-400">
-                Access a growing library of educational materials and activities.
-              </p>
-            </div>
+          <div className="flex gap-4">
+            <Button asChild size="lg">
+              <Link href="/dashboard">Get Started</Link>
+            </Button>
+            <Button asChild variant="outline" size="lg">
+              <Link href="/content-library">Browse Content</Link>
+            </Button>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
+
+      {/* Features Section */}
+      <section className="w-full border-t bg-gray-50/50 py-12 dark:bg-gray-950/50">
+        <div className="container grid gap-8 px-4 md:grid-cols-3">
+          <div className="rounded-lg border bg-card p-6">
+            <h3 className="mb-2 text-lg font-semibold">Simple Lesson Planning</h3>
+            <p className="text-sm text-muted-foreground">
+              Create and organize lessons effortlessly with our intuitive tools designed for educators.
+            </p>
+          </div>
+          <div className="rounded-lg border bg-card p-6">
+            <h3 className="mb-2 text-lg font-semibold">Progress Tracking</h3>
+            <p className="text-sm text-muted-foreground">
+              Monitor student development and identify learning opportunities with ease.
+            </p>
+          </div>
+          <div className="rounded-lg border bg-card p-6">
+            <h3 className="mb-2 text-lg font-semibold">Resource Library</h3>
+            <p className="text-sm text-muted-foreground">
+              Access a curated collection of educational materials and activities.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t py-6">
+        <div className="container flex flex-col items-center justify-between gap-4 px-4 text-center md:flex-row md:text-left">
+          <p className="text-sm text-muted-foreground">
+            2025 Ubongo Maarifa. All rights reserved.
+          </p>
+          <nav className="flex gap-4 text-sm text-muted-foreground">
+            <Link href="/about" className="hover:underline">About</Link>
+            <Link href="/contact" className="hover:underline">Contact</Link>
+            <Link href="/privacy" className="hover:underline">Privacy</Link>
+          </nav>
+        </div>
+      </footer>
+    </div>
   );
 }

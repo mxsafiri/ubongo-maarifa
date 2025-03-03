@@ -1,25 +1,30 @@
-import { Inter } from 'next/font/google'
-import '../styles/globals.css'
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import '../styles/globals.css';
+import { Providers } from '@/components/providers';
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
-export const metadata = {
-  title: 'Maarifa Learning Platform',
-  description: 'Empowering education through technology',
-}
+// Metadata needs to be in a separate constant since it can't be used in client components
+export const metadata: Metadata = {
+  title: 'Ubongo Maarifa',
+  description: 'Early Childhood Development Educational Platform',
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <div className="min-h-screen bg-[#0A1017]">
-          {children}
-        </div>
+        <Providers>
+          <div className="min-h-screen bg-background">
+            {children}
+          </div>
+        </Providers>
       </body>
     </html>
-  )
+  );
 }

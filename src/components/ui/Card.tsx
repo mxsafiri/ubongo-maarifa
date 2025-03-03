@@ -1,81 +1,79 @@
-import { motion } from 'framer-motion'
-import { ReactNode } from 'react'
+import * as React from "react"
 
-interface CardProps {
-  title: string
-  subtitle?: string
-  image?: string
-  color?: 'pink' | 'green' | 'blue'
-  link?: string
-  children?: ReactNode
-}
+import { cn } from "@/lib/utils"
 
-export default function Card({
-  title,
-  subtitle,
-  image,
-  color = 'pink',
-  link,
-  children,
-}: CardProps) {
-  const bgColors = {
-    pink: 'bg-pink-50',
-    green: 'bg-green-50',
-    blue: 'bg-blue-50',
-  }
+const Card = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "rounded-lg border bg-card text-card-foreground shadow-sm",
+      className
+    )}
+    {...props}
+  />
+))
+Card.displayName = "Card"
 
-  const textColors = {
-    pink: 'text-pink-600',
-    green: 'text-green-600',
-    blue: 'text-blue-600',
-  }
+const CardHeader = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("flex flex-col space-y-1.5 p-6", className)}
+    {...props}
+  />
+))
+CardHeader.displayName = "CardHeader"
 
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className={`rounded-2xl overflow-hidden ${bgColors[color]}`}
-    >
-      {image && (
-        <div className="aspect-[4/3] relative overflow-hidden">
-          <img
-            src={image}
-            alt={title}
-            className="object-cover w-full h-full transform transition-transform duration-300 hover:scale-105"
-          />
-        </div>
-      )}
-      <div className="p-6">
-        <h3 className="text-2xl font-display font-semibold text-gray-900">
-          {title}
-        </h3>
-        {subtitle && (
-          <p className="mt-2 text-base text-gray-600">{subtitle}</p>
-        )}
-        {children}
-        {link && (
-          <a
-            href={link}
-            className={`mt-4 inline-flex items-center ${textColors[color]} hover:underline`}
-          >
-            Learn more
-            <svg
-              className="ml-1 w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </a>
-        )}
-      </div>
-    </motion.div>
-  )
-}
+const CardTitle = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "text-2xl font-semibold leading-none tracking-tight",
+      className
+    )}
+    {...props}
+  />
+))
+CardTitle.displayName = "CardTitle"
+
+const CardDescription = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("text-sm text-muted-foreground", className)}
+    {...props}
+  />
+))
+CardDescription.displayName = "CardDescription"
+
+const CardContent = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
+))
+CardContent.displayName = "CardContent"
+
+const CardFooter = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("flex items-center p-6 pt-0", className)}
+    {...props}
+  />
+))
+CardFooter.displayName = "CardFooter"
+
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }

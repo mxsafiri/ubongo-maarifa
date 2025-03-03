@@ -1,6 +1,11 @@
 'use client';
 
-import React from 'react';
+import { LessonCreator } from '@/components/teacher/lesson/LessonCreator';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Card, CardContent } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { Clock, Users, Book } from 'lucide-react';
 
 export default function LessonsPage() {
   const stats = [
@@ -41,95 +46,90 @@ export default function LessonsPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-[#0A1017] pt-20">
-      <div className="mx-auto max-w-7xl px-4 py-8">
-        <div className="mb-8">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-4xl font-bold text-white">Lesson Planning</h1>
-              <p className="mt-2 text-gray-400">Create and manage engaging learning experiences</p>
-            </div>
-            <button className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
-              Create Lesson
-            </button>
-          </div>
+    <div className="container space-y-8 py-8">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">Lesson Planning</h1>
+          <p className="text-lg text-muted-foreground">
+            Create and manage engaging learning experiences
+          </p>
         </div>
+        <LessonCreator />
+      </div>
 
-        {/* Search and Filters */}
-        <div className="mb-8 flex gap-4">
-          <input
-            type="text"
-            placeholder="Search lessons..."
-            className="flex-1 rounded-lg bg-gray-800/50 px-4 py-2 text-white placeholder-gray-400"
-          />
-          <button className="rounded-lg bg-gray-800/50 px-4 py-2 text-white hover:bg-gray-700/50">
-            Filters
-          </button>
-        </div>
+      {/* Search and Filters */}
+      <div className="flex gap-4">
+        <Input
+          type="search"
+          placeholder="Search lessons..."
+          className="max-w-[400px]"
+        />
+        <Button variant="outline">Filters</Button>
+      </div>
 
-        {/* Stats Grid */}
-        <div className="mb-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {stats.map((stat) => (
-            <div key={stat.name} className="rounded-lg bg-gray-800/50 p-6">
-              <p className="text-sm text-gray-400">{stat.name}</p>
-              <p className="mt-2 text-3xl font-semibold text-white">{stat.value}</p>
-              <p className="mt-1 text-sm text-gray-400">{stat.subtext}</p>
-            </div>
-          ))}
-        </div>
+      {/* Stats Grid */}
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {stats.map((stat) => (
+          <Card key={stat.name} className="bg-card">
+            <CardContent className="p-6">
+              <p className="text-sm text-muted-foreground">{stat.name}</p>
+              <p className="mt-2 text-3xl font-semibold">{stat.value}</p>
+              <p className="mt-1 text-sm text-muted-foreground">{stat.subtext}</p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
 
-        {/* Lessons Grid */}
-        <div className="grid gap-6">
-          {lessons.map((lesson) => (
-            <div key={lesson.name} className="rounded-lg bg-gray-800/50 p-6">
+      {/* Lessons Grid */}
+      <div className="grid gap-6">
+        {lessons.map((lesson) => (
+          <Card key={lesson.name} className="bg-card">
+            <CardContent className="p-6">
               <div className="flex items-start justify-between">
-                <div>
+                <div className="space-y-3">
                   <div className="flex items-center gap-3">
-                    <h3 className="text-xl font-semibold text-white">{lesson.name}</h3>
+                    <h3 className="text-xl font-semibold">{lesson.name}</h3>
                     <span className={`rounded-full px-3 py-1 text-xs font-medium ${
                       lesson.status === 'Active' 
-                        ? 'bg-green-500/20 text-green-400'
-                        : 'bg-yellow-500/20 text-yellow-400'
+                        ? 'bg-primary/20 text-primary'
+                        : 'bg-muted text-muted-foreground'
                     }`}>
                       {lesson.status}
                     </span>
                   </div>
-                  <p className="mt-1 text-sm text-gray-400">{lesson.subject}</p>
-                  <p className="mt-3 text-gray-300">{lesson.description}</p>
-                  <div className="mt-4 flex items-center gap-4 text-sm text-gray-400">
-                    <span>⏱ {lesson.duration}</span>
-                    <span>👥 {lesson.enrolled}</span>
+                  <p className="text-sm text-muted-foreground">{lesson.subject}</p>
+                  <p className="text-sm">{lesson.description}</p>
+                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                    <span className="flex items-center gap-1">
+                      <Clock className="h-4 w-4" />
+                      {lesson.duration}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Users className="h-4 w-4" />
+                      {lesson.enrolled}
+                    </span>
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <button className="rounded bg-gray-700/50 px-4 py-2 text-sm text-white hover:bg-gray-600/50">
-                    View Details
-                  </button>
+                  <Button variant="outline">View Details</Button>
                   {lesson.status === 'Active' && (
-                    <button className="rounded bg-blue-500 px-4 py-2 text-sm text-white hover:bg-blue-600">
-                      Start Session
-                    </button>
+                    <Button>Start Session</Button>
                   )}
                 </div>
               </div>
               {lesson.completion > 0 && (
-                <div className="mt-4">
+                <div className="mt-4 space-y-2">
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-400">Completion Rate</span>
-                    <span className="text-gray-400">{lesson.completion}%</span>
+                    <span className="text-muted-foreground">Completion Rate</span>
+                    <span className="text-muted-foreground">{lesson.completion}%</span>
                   </div>
-                  <div className="mt-1 h-2 overflow-hidden rounded-full bg-gray-700">
-                    <div 
-                      className="h-full bg-blue-500"
-                      style={{ width: `${lesson.completion}%` }}
-                    />
-                  </div>
+                  <Progress value={lesson.completion} className="h-2" />
                 </div>
               )}
-            </div>
-          ))}
-        </div>
+            </CardContent>
+          </Card>
+        ))}
       </div>
-    </main>
+    </div>
   );
 }

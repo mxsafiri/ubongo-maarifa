@@ -19,8 +19,10 @@ import {
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import PageTransition from './PageTransition'
-import ThemeToggle from '../ThemeToggle'
+import { ThemeToggle } from "/Users/aux.wav/Projects/ubongo-maarifa/src/components/ThemeToggle";
 import { useTheme } from '@/context/ThemeContext'
+import { ProgressModal } from "@/components/dashboard/ProgressModal";
+import { UserNav } from "./UserNav";
 
 interface NavItem {
   name: string
@@ -146,8 +148,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             <div className="flex flex-1">
               {/* Add search or other header content here */}
             </div>
-            <div className="ml-4 flex items-center md:ml-6">
-              {/* Add notifications, profile dropdown, etc. here */}
+            <div className="flex items-center space-x-4">
+              <ProgressModal />
+              <ThemeToggle />
+              <UserNav />
             </div>
           </div>
         </div>
@@ -167,7 +171,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         </main>
       </div>
       <div className="fixed bottom-6 right-6">
-        <ThemeToggle />
+        {/* Empty div for potential future use */}
       </div>
     </div>
   )
