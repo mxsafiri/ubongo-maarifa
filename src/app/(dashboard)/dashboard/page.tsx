@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
@@ -95,7 +96,7 @@ export default function DashboardPage() {
         <div className="space-y-1">
           <h1 className="text-heading-lg font-bold tracking-tight">Welcome back, Teacher!</h1>
           <p className="text-body-lg text-muted-foreground">
-            Here's an overview of your teaching progress and student engagement.
+            Here&apos;s an overview of your teaching progress and student engagement.
           </p>
         </div>
         <QuickActions />
